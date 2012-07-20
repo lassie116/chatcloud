@@ -7,3 +7,4 @@
 
 vendor
 .bundle
+mongodb_test/data
