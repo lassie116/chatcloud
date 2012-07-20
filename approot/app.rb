@@ -1,4 +1,5 @@
 require 'mongo'
+require 'json'
 
 ENV_FILE = '/home/dotcloud/environment.json'
 def get_collection
