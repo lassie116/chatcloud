@@ -7,17 +7,21 @@ def get_collection
   port = nil
   user = nil
   pass = nil
-
+  
+  db = nil
   if File.exist?(ENV_FILE)
     env = JSON.parse(File.read(ENV_FILE))
     host = env['DOTCLOUD_DB_MONGODB_HOST']
     port = env['DOTCLOUD_DB_MONGODB_PORT'].to_i
     user = env['DOTCLOUD_DB_MONGODB_LOGIN']
     pass = env['DOTCLOUD_DB_MONGODB_PASSWORD']
+    con = Mongo::Connection.new(host,port)  
+    db = con.db("test")
+    db.authenticate(user,pass) if pass
+  else
+    con = Mongo::Connection.new
+    db = con.db("test")
   end
-  con = Mongo::Connection.new
-  db = con.db("test")
-  db.authenticate(user,pass) if pass
   db["message_list"]
 end
 
