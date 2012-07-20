@@ -18,7 +18,7 @@ def get_collection
     user = env['DOTCLOUD_DB_MONGODB_LOGIN']
     pass = env['DOTCLOUD_DB_MONGODB_PASSWORD']
     con = Mongo::Connection.new(host,port)  
-    db = con.db("test")
+    db = con.db("admin")
     db.authenticate(user,pass) if pass
   else
     con = Mongo::Connection.new
