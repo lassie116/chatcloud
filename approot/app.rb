@@ -4,12 +4,9 @@ require 'json'
 enable :show_exceptions
 
 ENV_FILE = '/home/dotcloud/environment.json'
+DB_NAME = 'admin'
+
 def get_collection
-  host = nil
-  port = nil
-  user = nil
-  pass = nil
-  
   db = nil
   if File.exist?(ENV_FILE)
     env = JSON.parse(File.read(ENV_FILE))
@@ -18,11 +15,11 @@ def get_collection
     user = env['DOTCLOUD_DB_MONGODB_LOGIN']
     pass = env['DOTCLOUD_DB_MONGODB_PASSWORD']
     con = Mongo::Connection.new(host,port)  
-    db = con.db("admin")
-    db.authenticate(user,pass) if pass
+    db = con.db(DB_NAME)
+    db.authenticate(user,pass)
   else
     con = Mongo::Connection.new
-    db = con.db("test")
+    db = con.db(DB_NAME)
   end
   db["message_list"]
 end
