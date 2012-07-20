@@ -1,6 +1,8 @@
 require 'mongo'
 require 'json'
 
+enable :show_exceptions
+
 ENV_FILE = '/home/dotcloud/environment.json'
 def get_collection
   host = nil
