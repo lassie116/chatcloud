@@ -1,5 +1,10 @@
 www:
   type: ruby
   approot: approot
+ws:
+  type: ruby-worker
+  ports:
+    websocket: tcp
+  approot: ws
 db:
   type: mongodb

@@ -4,7 +4,7 @@ GEM
     bson (1.6.4)
     bson_ext (1.6.4)
       bson (~> 1.6.4)
-    json (1.7.3)
+    json (1.7.4)
     mongo (1.6.4)
       bson (~> 1.6.4)
     rack (1.4.1)

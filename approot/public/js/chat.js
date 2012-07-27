@@ -1,9 +1,14 @@
 (function(){
+     //var servername = "localhost:8080"
+     //var servername = "chatcloud-ls.dotcloud.com:32901"
+     //var ws = new WebSocket("ws://" + servername );
+     var ws = new WebSocket(ws_url);
+     
      function send_handler(ev){
          var mes = $("#mes").val();
          $("#mes").val("");
          jQuery.post("/post",{"mes":mes});
-         setTimeout(ajax_get,100);
+         ws.send("ping");
      }
 
      function ajax_get(){
@@ -21,5 +26,19 @@
 
      $("#send").click(send_handler);
      $("#get").click(ajax_get);
-     //setInterval(ajax_get,1000);
-}())
+     
+     ws.onmessage = function(evt) {
+         console.log("recv");
+         console.log(evt.data);
+         ajax_get();
+     };
+     
+     ws.onclose = function() {
+         console.log("close");
+     };
+     
+     ws.onopen = function() {
+         console.log("connected");
+     };
+     
+ }())
